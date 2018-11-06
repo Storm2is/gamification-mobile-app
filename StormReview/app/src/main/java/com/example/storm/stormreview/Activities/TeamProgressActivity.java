@@ -85,16 +85,16 @@ public class TeamProgressActivity extends AppCompatActivity {
         User user2 = new User("Oluchi", 3, "email", 145);
         usersList.add(user2);
 
-        User user3 = new User("Mikhail", 4, "email", 120);
+        User user3 = new User("Phuong", 4, "email", 120);
         usersList.add(user3);
 
-        User user4 = new User("Phuong", 5, "email", 80);
+        User user4 = new User("Mikhail", 5, "email", 80);
         usersList.add(user4);
 
         User user5 = new User("Shujun", 6, "email", 45);
         usersList.add(user5);
 
-        User user6 = new User("Storm", 7, "email", 31);
+        User user6 = new User("Collective", 7, "email", 31);
         usersList.add(user6);
 
         mAdapter.notifyDataSetChanged();
