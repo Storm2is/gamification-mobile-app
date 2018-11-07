@@ -1,15 +1,18 @@
-package com.example.storm.stormreview.Activities;
+package Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.storm.stormreview.R;
 
-public class LeaderBoardActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leader_board);
+        setContentView(R.layout.activity_home);
+        setTitle("Your Progress");
+
+
     }
 }

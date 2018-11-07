@@ -1,4 +1,4 @@
-package com.example.storm.stormreview.Activities;
+package Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

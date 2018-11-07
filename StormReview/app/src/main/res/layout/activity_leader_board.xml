@@ -1,9 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.LeaderBoardActivity">
+    tools:context="Activities.LeaderBoardActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/best_novice" />
+
+            <TextView
+                android:id="@+id/badge1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tamer"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded1"
+                android:padding="3dp"
+                android:text="Best Novice"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/super_star" />
+
+            <TextView
+                android:id="@+id/badge2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Oluchi"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded1"
+                android:padding="3dp"
+                android:text="Super Star"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/master_reviewer" />
+
+            <TextView
+                android:id="@+id/badge3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Mikhail"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded1"
+                android:padding="3dp"
+                android:text="Master Reviewer"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/master_coder"/>
+            <TextView
+                android:id="@+id/badge4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Shujun"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded1"
+                android:padding="3dp"
+                android:text="Master Coder"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

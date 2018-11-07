@@ -1,11 +1,10 @@
-package com.example.storm.stormreview.Activities;
+package Activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
@@ -14,11 +13,6 @@ import java.util.List;
 
 import Adapters.UserAdapter;
 import Models.User;
-import Services.ApiClient;
-import Services.UserClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class TeamProgressActivity extends AppCompatActivity {
     private List<User> usersList = new ArrayList<>();
@@ -32,6 +26,7 @@ public class TeamProgressActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_progress);
+        setTitle("LeaderBoard");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
        /* progressDoalog = new ProgressDialog(TeamProgressActivity.this);
@@ -76,25 +71,25 @@ public class TeamProgressActivity extends AppCompatActivity {
 
     private void prepareUsersData() {
 
-        User user = new User("Tamer", 1, "email", 300);
+        User user = new User("Tamer", 1, "email", 110);
         usersList.add(user);
 
-        User user1 = new User("Rayhane", 2, "email", 200);
+        User user1 = new User("Rayhane", 2, "email", 150);
         usersList.add(user1);
 
-        User user2 = new User("Oluchi", 3, "email", 145);
+        User user2 = new User("Oluchi", 3, "email", 233);
         usersList.add(user2);
 
-        User user3 = new User("Phuong", 4, "email", 120);
+        User user3 = new User("Phuong", 4, "email", 245);
         usersList.add(user3);
 
-        User user4 = new User("Mikhail", 5, "email", 80);
+        User user4 = new User("Mikhail", 5, "email", 270);
         usersList.add(user4);
 
-        User user5 = new User("Shujun", 6, "email", 45);
+        User user5 = new User("Shujun", 6, "email", 360);
         usersList.add(user5);
 
-        User user6 = new User("Collective", 7, "email", 31);
+        User user6 = new User("Collective", 7, "email", 0);
         usersList.add(user6);
 
         mAdapter.notifyDataSetChanged();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#f4511e</color>
-    <color name="colorPrimaryDark">#DD2C00</color>
+    <color name="colorPrimaryDark">#dd2c00</color>
     <color name="colorAccent">#00C853</color>
     <color name="username">#263238</color>
     <color name="points">#455A64</color>
