@@ -1,4 +1,4 @@
-package Activities;
+package activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;

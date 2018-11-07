@@ -11,21 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Activities.LoginActivity">
+        <activity android:name="activities.LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Activities.TeamProgressActivity"></activity>
+        <activity android:name="activities.TeamProgressActivity">
+
+        </activity>
         <activity
-            android:name="Activities.MenuActivity"
+            android:name="activities.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" ></activity>
-        <activity android:name="Activities.LeaderBoardActivity" ></activity>
-        <activity android:name="Activities.HomeActivity"></activity>
+        <activity android:name="activities.LeaderBoardActivity" ></activity>
+        <activity android:name="activities.HomeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package Activities;
+package activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         user1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,42 +41,42 @@ public class LoginActivity extends AppCompatActivity {
         user2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
         user3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
         user4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
         user5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
         user6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
         user7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TeamProgressActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
