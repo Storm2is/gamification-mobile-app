@@ -1,8 +1,8 @@
-package Services;
+package services;
 
 import java.util.List;
 
-import Models.User;
+import models.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

@@ -5,21 +5,27 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Adapters.UserAdapter;
-import Models.User;
+import adapters.UserAdapter;
+import models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiClient;
+import services.UserClient;
 
 public class TeamProgressActivity extends AppCompatActivity {
     private List<User> usersList = new ArrayList<>();
     private RecyclerView recyclerView;
     private UserAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    ProgressDialog progressDoalog;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -70,7 +76,20 @@ public class TeamProgressActivity extends AppCompatActivity {
 
 
     private void prepareUsersData() {
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                mAdapter = new UserAdapter(response.body(), TeamProgressActivity.this);
+            }
 
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(TeamProgressActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        /*
         User user = new User("Tamer", 1, "email", 110);
         usersList.add(user);
 
@@ -91,7 +110,7 @@ public class TeamProgressActivity extends AppCompatActivity {
 
         User user6 = new User("Collective", 7, "email", 0);
         usersList.add(user6);
-
+        */
         mAdapter.notifyDataSetChanged();
     }
 }
