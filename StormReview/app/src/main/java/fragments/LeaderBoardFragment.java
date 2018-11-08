@@ -7,17 +7,26 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Adapters.UserAdapter;
-import Models.User;
+import activities.TeamProgressActivity;
+import adapters.UserAdapter;
+import models.Point;
+import models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiClient;
+import services.UserClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,30 +84,54 @@ public class LeaderBoardFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+      /*  UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                usersList = response.body();
+                Log.e("success", "Number of users received: " + usersList.size());
+                Log.e("userss list", usersList.toString());
+                mAdapter = new UserAdapter(usersList, getActivity());
+                mAdapter.notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("failure",t.getMessage());
+
+            }
+        });*/
+
 
     }
 
     private void prepareUsersData() {
 
-        User user = new User("Tamer", 1, "email", 110);
+        Point point = new Point(1,100);
+
+        User user = new User("Tamer", 1, "email", point);
         usersList.add(user);
 
-        User user1 = new User("Rayhane", 2, "email", 150);
+        User user1 = new User("Rayhane", 2, "email",point);
         usersList.add(user1);
 
-        User user2 = new User("Oluchi", 3, "email", 233);
+        User user2 = new User("Oluchi", 3, "email",point);
         usersList.add(user2);
 
-        User user3 = new User("Phuong", 4, "email", 245);
+        User user3 = new User("Phuong", 4, "email", point);
         usersList.add(user3);
 
-        User user4 = new User("Mikhail", 5, "email", 270);
+        User user4 = new User("Mikhail", 5, "email", point);
         usersList.add(user4);
 
-        User user5 = new User("Shujun", 6, "email", 360);
+        User user5 = new User("Shujun", 6, "email", point);
         usersList.add(user5);
 
-        User user6 = new User("Collective", 7, "email", 0);
+        User user6 = new User("Collective", 7, "email", point);
         usersList.add(user6);
 
         mAdapter.notifyDataSetChanged();
@@ -141,13 +174,29 @@ public class LeaderBoardFragment extends Fragment {
         // in content do not change the layout size of the RecyclerView
 
         recyclerView.setHasFixedSize(true);
-        mAdapter = new UserAdapter(usersList, getActivity());
-
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
 
-        prepareUsersData();
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                usersList = response.body();
+                Log.e("success", "Number of users received: " + usersList.size());
+                Log.e("userss list", usersList.toString());
+                mAdapter = new UserAdapter(usersList, getActivity());
+                recyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("failure",t.getMessage());
+
+            }
+        });
         return view;
     }
 

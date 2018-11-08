@@ -3,85 +3,77 @@ package activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import adapters.OnItemClickListener;
+import adapters.ProfileAdapter;
+import adapters.UserAdapter;
+import models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiClient;
+import services.UserClient;
+
 public class LoginActivity extends AppCompatActivity {
 
-    ImageView user1,user2,user3,user4,user5,user6,user7;
 
-
+    private List<User> usersList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private ProfileAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("Identify Yourself !");
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_profiles);
 
-        user1 = (ImageView) findViewById(R.id.imageView1);
-        user2 = (ImageView) findViewById(R.id.imageView2);
-        user3 = (ImageView) findViewById(R.id.imageView3);
-        user4 = (ImageView) findViewById(R.id.imageView4);
-        user5 = (ImageView) findViewById(R.id.imageView5);
-        user6 = (ImageView) findViewById(R.id.imageView6);
-        user7 = (ImageView) findViewById(R.id.imageView7);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
 
-
-
-        user1.setOnClickListener(new View.OnClickListener() {
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        call.enqueue(new Callback<List<User>>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        user2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        user3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        user4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        user5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        user6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
-        user7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                usersList = response.body();
+                Log.e("success", "Number of users received: " + usersList.size());
+                Log.e("userss list", usersList.toString());
+                mAdapter = new ProfileAdapter(usersList, LoginActivity.this, new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(User item) {
+                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                        intent.putExtra("userId",item.getId());
+                        LoginActivity.this.startActivity(intent);
+                    }
+                });
+                recyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
 
 
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("failure",t.getMessage());
+
+            }
+        });
 
 
 

@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,12 +22,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
+import java.util.List;
+
+import adapters.UserAdapter;
 import fragments.BadgesFragment;
 import fragments.HomeFragment;
 import fragments.LeaderBoardFragment;
+import models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiClient;
+import services.UserClient;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.OnFragmentInteractionListener,
@@ -103,9 +114,30 @@ public class MenuActivity extends AppCompatActivity
 
     private void loadNavHeader() {
         // name, website
-        txtName.setText("Username");
-        int id = this.getResources().getIdentifier("user" + String.valueOf("1"), "drawable", this.getPackageName());
-        imgProfile.setBackgroundResource(id);
+
+        int userId = getIntent().getIntExtra("userId", 0);
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<User> call = service.getUser(String.valueOf(userId));
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User connectedUser = response.body();
+                Log.e("userss list", connectedUser.getUsername());
+                txtName.setText(connectedUser.getUsername().toUpperCase());
+                int id = MenuActivity.this.getResources().getIdentifier("user" + String.valueOf(connectedUser.getId()), "drawable", MenuActivity.this.getPackageName());
+                imgProfile.setBackgroundResource(id);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("failure",t.getMessage());
+                txtName.setText("Username");
+                int id = MenuActivity.this.getResources().getIdentifier("user" + String.valueOf("1"), "drawable", MenuActivity.this.getPackageName());
+                imgProfile.setBackgroundResource(id);
+            }
+        });
+
+
     }
 
     /***

@@ -1,4 +1,4 @@
-package Services;
+package services;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    static String API_BASE_URL = "http://10.0.2.2";
+    static String API_BASE_URL = "http://10.0.2.2:8080/";
 
     public static Retrofit getClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
