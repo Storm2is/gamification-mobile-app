@@ -71,5 +71,4 @@ public class BadgeAdapter extends RecyclerView.Adapter<BadgeAdapter.BadgeViewHol
         return badgesList.size();
     }
 
-
 }

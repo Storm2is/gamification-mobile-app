@@ -1,6 +1,8 @@
 package activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -52,13 +54,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 usersList = response.body();
                 Log.e("success", "Number of users received: " + usersList.size());
-                Log.e("userss list", usersList.toString());
+                Log.e("users list", usersList.toString());
                 mAdapter = new ProfileAdapter(usersList, LoginActivity.this, new OnItemClickListener() {
                     @Override
                     public void onItemClick(User item) {
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         intent.putExtra("userId",item.getId());
+
+                        SharedPreferences sharedPref = LoginActivity.this.getSharedPreferences("userId",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putInt("userId",item.getId());
+                        editor.apply();
                         LoginActivity.this.startActivity(intent);
+
+
                     }
                 });
                 recyclerView.setAdapter(mAdapter);
