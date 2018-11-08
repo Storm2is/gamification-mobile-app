@@ -1,4 +1,4 @@
-package Adapters;
+package adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,7 +13,7 @@ import com.example.storm.stormreview.R;
 
 import java.util.List;
 
-import Models.User;
+import models.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
@@ -55,7 +55,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder userViewHolder, int i) {
         User user = usersList.get(i);
         userViewHolder.username.setText(user.getUsername());
-        userViewHolder.points.setText(String.valueOf(user.getPoints()) + " Pts");
+        userViewHolder.points.setText(String.valueOf(user.getPoint().getValue()) + " Pts");
         int id = mContext.getResources().getIdentifier("user" + String.valueOf(user.getId()), "drawable", mContext.getPackageName());
         userViewHolder.avatar.setBackgroundResource(id);
     }

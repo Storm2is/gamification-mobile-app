@@ -1,19 +1,21 @@
-package Models;
+package models;
+
+import models.Point;
 
 public class User {
     private String username;
     private int id;
     private String email;
-    private int points;
+    private Point point;
 
     public User() {
     }
 
-    public User(String username, int id, String email, int points) {
+    public User(String username, int id, String email, Point point) {
         this.username = username;
         this.id = id;
         this.email = email;
-        this.points = points;
+        this.setPoint(point);
     }
 
     public void setUsername(String username) {
@@ -28,10 +30,6 @@ public class User {
         this.email = email;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -44,7 +42,11 @@ public class User {
         return email;
     }
 
-    public int getPoints() {
-        return points;
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }
