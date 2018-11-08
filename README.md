@@ -1,1 +1,1 @@
-# gamification-mobile-app
+# Strom Review Mobile App### Description:- A companion mobile application for the Code review platform ( Find project [Here](https://github.com/Storm2is/software-quality-platform).), to include gamification concepts in order to measure the progress of a Scrum team during a project.### Gamification Concepts & Screenshots:#### Milestone for self progress & Message of the day:#### LeaderBoard:#### Badges:
