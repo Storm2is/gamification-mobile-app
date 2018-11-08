@@ -104,9 +104,8 @@ public class LeaderBoardFragment extends Fragment {
                 Log.e("failure",t.getMessage());
 
             }
+
         });*/
-
-
     }
 
     private void prepareUsersData() {

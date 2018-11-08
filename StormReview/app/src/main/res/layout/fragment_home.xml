@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#ffffff"
        >
 
         <LinearLayout
@@ -23,9 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded"
-                android:drawableRight="@drawable/happy"
                 android:paddingEnd="30dp"
-                android:text="You did Great job Today !"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
@@ -61,10 +60,11 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/penguin"
                 android:layout_width="270dp"
                 android:layout_height="270dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/penguin_full" />
+                 />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="65dp"
-                    android:text="Intermidiate"
+                    android:text="Intermediate"
                     android:textColor="@color/username"
                     android:textSize="20sp"
                     android:textStyle="bold" />

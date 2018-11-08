@@ -96,10 +96,4 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         return usersList.size();
     }
 
-
-
-
-
-
-
 }
