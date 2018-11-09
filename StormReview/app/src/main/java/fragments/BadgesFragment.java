@@ -97,7 +97,7 @@ public class BadgesFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_badges);
 
         layoutManager = new GridLayoutManager(getActivity(), 2);
-        ;
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 

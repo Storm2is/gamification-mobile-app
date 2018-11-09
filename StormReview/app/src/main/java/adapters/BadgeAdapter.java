@@ -59,9 +59,9 @@ public class BadgeAdapter extends RecyclerView.Adapter<BadgeAdapter.BadgeViewHol
     @Override
     public void onBindViewHolder(@NonNull BadgeViewHolder badgeViewHolder, int i) {
         UserBadge badge = badgesList.get(i);
-        badgeViewHolder.userName.setText(badge.getUser().getUsername());
+        badgeViewHolder.userName.setText(badge.getUser().getUsername().toUpperCase());
         badgeViewHolder.badgeName.setText(badge.getBadge().replaceAll("_", " ").toUpperCase());
-        int id = mContext.getResources().getIdentifier( badge.getBadge(), "drawable", mContext.getPackageName());
+        int id = mContext.getResources().getIdentifier( badge.getBadge().replaceAll(" ", "_"), "drawable", mContext.getPackageName());
         badgeViewHolder.badgeImg.setBackgroundResource(id);
 
     }
