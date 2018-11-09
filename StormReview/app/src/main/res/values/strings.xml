@@ -16,7 +16,7 @@
     <string name="closeDrawer">close_drawer</string>
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>Home</item>
+        <item>Your Progress</item>
         <item>LeaderBoard</item>
         <item>Badges</item>
         <item>Disconnect</item>

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
 
-    List<models.User> usersList = new ArrayList<>();
+    //private List<User> usersList = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -84,26 +86,8 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        Button pointsBtn = view.findViewById(R.id.buttonP);
-        Button messageBtn = view.findViewById(R.id.buttonM);
-
-        //get user id
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("userId",Context.MODE_PRIVATE);
-        int userId = sharedPref.getInt("userId", 20);
-        Log.i("UserId ",String.valueOf(userId));
-
-
-        usersList = getUsers();
-
-        // Get list of users and points from REST
-        UserClient service = ApiClient.getClient().create(UserClient.class);
+       /* UserClient service = ApiClient.getClient().create(UserClient.class);
         Call<List<User>> call = service.getUsers();
         call.enqueue(new Callback<List<User>>() {
             @Override
@@ -121,10 +105,40 @@ public class HomeFragment extends Fragment {
 
             }
         });
+*/
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Button pointsBtn = view.findViewById(R.id.buttonP);
+        Button messageBtn = view.findViewById(R.id.buttonM);
+
+        //get user id
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("userId",Context.MODE_PRIVATE);
+        int userId = sharedPref.getInt("userId", 20);
+        Log.i("UserIdShared ",String.valueOf(userId));
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //usersList = getUsers();
+
+        // Get list of users and points from REST
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        List<User> usersList = new ArrayList<>();
+        try {
+            usersList = call.execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         // Get the logged in user
-        models.User user = usersList.get(userId);
+        User user = usersList.get(userId - 1);
         Log.i("user points",String.valueOf(user.getPoint().getValue()));
         // get current userPoints ==> 120
         setAvatar(view, user.getPoint().getValue());
@@ -189,17 +203,17 @@ public class HomeFragment extends Fragment {
         switch (status) {
             case Sad: {
                 img = getContext().getResources().getDrawable(R.drawable.sad);
-                message = "You can do better !! ";
+                message = "Your are below team average! ";
                 break;
             }
             case Happy: {
                 img = getContext().getResources().getDrawable(R.drawable.happy);
-                message = "Keep it up !! ";
+                message = " you are above team average, Keep it up! ";
                 break;
             }
             case Super: {
                 img = getContext().getResources().getDrawable(R.drawable.in_love);
-                message = "You did a great job today !! ";
+                message = "Bravo! you are way above team average ";
                 break;
             }
         }
@@ -236,7 +250,7 @@ public class HomeFragment extends Fragment {
             avatar.setBackgroundResource(R.drawable.penguin_2_2);
         } else if (point >= 175 && point < 250) {
             avatar.setBackgroundResource(R.drawable.penguin_3);
-        } else if (point >= 250 && point < 350) {
+        } else if (point >= 250 && point < 400) {
             avatar.setBackgroundResource(R.drawable.penguin_3_3);
         } else {
             avatar.setBackgroundResource(R.drawable.penguin_5);

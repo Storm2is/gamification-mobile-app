@@ -54,7 +54,7 @@ public class MenuActivity extends AppCompatActivity
     public static int navItemIndex = 0;
 
     // tags used to attach the fragments
-    private static final String TAG_HOME = "home";
+    private static final String TAG_HOME = "Your Progress";
     private static final String TAG_LEADERBOARD = "leaderboard";
     private static final String TAG_BADGES = "badges";
     private static final String TAG_DISCONNECT = "disconnect";
