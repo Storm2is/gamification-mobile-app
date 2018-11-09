@@ -54,7 +54,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.UserViewHolder userViewHolder, int i) {
         User user = usersList.get(i);
-        userViewHolder.username.setText(user.getUsername());
+        userViewHolder.username.setText(user.getUsername().toUpperCase());
         userViewHolder.points.setText(String.valueOf(user.getPoint().getValue()) + " Pts");
         int id = mContext.getResources().getIdentifier("user" + String.valueOf(user.getId()), "drawable", mContext.getPackageName());
         userViewHolder.avatar.setBackgroundResource(id);

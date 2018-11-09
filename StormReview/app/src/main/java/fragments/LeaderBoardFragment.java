@@ -18,7 +18,6 @@ import com.example.storm.stormreview.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import activities.TeamProgressActivity;
 import adapters.UserAdapter;
 import models.Point;
 import models.User;
