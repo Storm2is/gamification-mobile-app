@@ -2,6 +2,7 @@ package adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -86,7 +87,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                 Intent intent = new Intent(mContext, MenuActivity.class);
                 User user = usersList.get(i);
                 intent.putExtra("userId",user.getId());
+                SharedPreferences sharedPref = mContext.getSharedPreferences("userId",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("userId",user.getId());
+                editor.apply();
                 mContext.startActivity(intent);
+
             }
         });
     }

@@ -1,10 +1,12 @@
 package fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +77,11 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //get user id
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("userId",Context.MODE_PRIVATE);
+        int userId = sharedPref.getInt("userId", 20);
+        Log.i("UserId ",String.valueOf(userId));
+
         // Get list of users and points from REST
         List<models.User> list = getUsers();
         // Get the logged in user
@@ -83,37 +90,36 @@ public class HomeFragment extends Fragment {
         setAvatar(view, 120);
 
         int totalPoints = 0;
-        for(models.User u : list)
-        {
+        for (models.User u : list) {
             totalPoints += u.getPoint().getValue();
         }
-        float avgPoints = totalPoints/list.size();
-        if(user.getPoint().getValue() < avgPoints) {
+        float avgPoints = totalPoints / list.size();
+        if (user.getPoint().getValue() < avgPoints) {
             setWelcomeMessage(view, WelcomeStatus.Sad);
-        }else if(user.getPoint().getValue() > avgPoints && user.getPoint().getValue() < (avgPoints*1.5) ){
+        } else if (user.getPoint().getValue() > avgPoints && user.getPoint().getValue() < (avgPoints * 1.5)) {
             setWelcomeMessage(view, WelcomeStatus.Happy);
-        }else{
+        } else {
             setWelcomeMessage(view, WelcomeStatus.Super);
         }
 
         return view;
     }
 
-    private List<User> getUsers(){
-        models.Point point1 = new models.Point(1,10);
-        models.Point point2 = new models.Point(1,75);
-        models.Point point3 = new models.Point(1,200);
-        models.Point point4 = new models.Point(1,125);
-        models.Point point5 = new models.Point(1,111);
+    private List<User> getUsers() {
+        models.Point point1 = new models.Point(1, 10);
+        models.Point point2 = new models.Point(1, 75);
+        models.Point point3 = new models.Point(1, 200);
+        models.Point point4 = new models.Point(1, 125);
+        models.Point point5 = new models.Point(1, 111);
 
         List<models.User> usersList = new ArrayList<>();
         models.User user = new models.User("Tamer", 1, "email", point1);
         usersList.add(user);
 
-        models.User user1 = new models.User("Rayhane", 2, "email",point2);
+        models.User user1 = new models.User("Rayhane", 2, "email", point2);
         usersList.add(user1);
 
-        models.User user2 = new models.User("Oluchi", 3, "email",point3);
+        models.User user2 = new models.User("Oluchi", 3, "email", point3);
         usersList.add(user2);
 
         models.User user3 = new models.User("Phuong", 4, "email", point4);
@@ -152,7 +158,7 @@ public class HomeFragment extends Fragment {
                 break;
             }
         }
-        img.setBounds( 0, 0, 80, 80 );
+        img.setBounds(0, 0, 80, 80);
         btn.setCompoundDrawables(null, null, img, null);
         btn.setText(message);
 
