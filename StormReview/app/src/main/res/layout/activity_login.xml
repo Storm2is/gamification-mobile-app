@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="100dp"
         android:orientation="vertical">
 
         <TextView
@@ -19,8 +19,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="Hello !"
-            android:textSize="20sp"
+            android:text="Hello Team!"
+            android:textSize="25sp"
             android:textStyle="bold"
             tools:typeface="normal" />
 
@@ -32,8 +32,8 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:text="Tell us who you are ?"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
     </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

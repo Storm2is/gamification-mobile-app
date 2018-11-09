@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,14 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.storm.stormreview.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import activities.LoginActivity;
+import activities.MenuActivity;
+import adapters.OnItemClickListener;
+import adapters.ProfileAdapter;
 import models.User;
 import models.WelcomeStatus;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import services.ApiClient;
+import services.UserClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +45,9 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+
+    List<models.User> usersList = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,23 +91,50 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        Button pointsBtn = view.findViewById(R.id.buttonP);
+        Button messageBtn = view.findViewById(R.id.buttonM);
+
         //get user id
         SharedPreferences sharedPref = getActivity().getSharedPreferences("userId",Context.MODE_PRIVATE);
         int userId = sharedPref.getInt("userId", 20);
         Log.i("UserId ",String.valueOf(userId));
 
+
+        usersList = getUsers();
+
         // Get list of users and points from REST
-        List<models.User> list = getUsers();
+        UserClient service = ApiClient.getClient().create(UserClient.class);
+        Call<List<User>> call = service.getUsers();
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                usersList = response.body();
+                Log.e("success", "Number of users received: " + usersList.size());
+                Log.e("users list home page", usersList.toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                Log.e("failure homePage",t.getMessage());
+
+            }
+        });
+
+
         // Get the logged in user
-        models.User user = list.get(2);
+        models.User user = usersList.get(userId);
+        Log.i("user points",String.valueOf(user.getPoint().getValue()));
         // get current userPoints ==> 120
-        setAvatar(view, 120);
+        setAvatar(view, user.getPoint().getValue());
+        pointsBtn.setText("Your Points: " + String.valueOf(user.getPoint().getValue()) + " Pts");
 
         int totalPoints = 0;
-        for (models.User u : list) {
+        for (models.User u : usersList) {
             totalPoints += u.getPoint().getValue();
         }
-        float avgPoints = totalPoints / list.size();
+        float avgPoints = totalPoints / usersList.size();
         if (user.getPoint().getValue() < avgPoints) {
             setWelcomeMessage(view, WelcomeStatus.Sad);
         } else if (user.getPoint().getValue() > avgPoints && user.getPoint().getValue() < (avgPoints * 1.5)) {
@@ -101,6 +142,9 @@ public class HomeFragment extends Fragment {
         } else {
             setWelcomeMessage(view, WelcomeStatus.Super);
         }
+
+        int poitnsToNextLevel = getPointsToTheNextLevel(user.getPoint().getValue());
+        messageBtn.setText("You need " + String.valueOf(poitnsToNextLevel) + " Pts to reach next Level !");
 
         return view;
     }
@@ -139,6 +183,7 @@ public class HomeFragment extends Fragment {
 
     private void setWelcomeMessage(View view, WelcomeStatus status) {
         Button btn = view.findViewById(R.id.button);
+
         Drawable img = null;
         String message = "Welcome";
         switch (status) {
@@ -162,6 +207,17 @@ public class HomeFragment extends Fragment {
         btn.setCompoundDrawables(null, null, img, null);
         btn.setText(message);
 
+
+    }
+
+    private int getPointsToTheNextLevel(int point) {
+        if (point == 0 || (point > 0 && point < 25)) {
+            return 25 - point;
+        } else if (point >= 25 && point < 100) {
+            return 100 - point;
+        } else {
+            return 400 - point;
+        }
     }
 
     private void setAvatar(View view, int point) {
@@ -186,6 +242,7 @@ public class HomeFragment extends Fragment {
             avatar.setBackgroundResource(R.drawable.penguin_5);
         }
     }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event

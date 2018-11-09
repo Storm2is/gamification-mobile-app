@@ -16,9 +16,10 @@ import android.widget.Toast;
 import com.example.storm.stormreview.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import activities.TeamProgressActivity;
 import adapters.UserAdapter;
 import models.Point;
 import models.User;
@@ -182,6 +183,12 @@ public class LeaderBoardFragment extends Fragment {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 usersList = response.body();
+                Collections.sort(usersList, new Comparator<User>() {
+                    public int compare(User o1, User o2) {
+                        return o2.getPoint().getValue().compareTo(o1.getPoint().getValue());
+                    }
+                });
+
                 Log.e("success", "Number of users received: " + usersList.size());
                 Log.e("userss list", usersList.toString());
                 mAdapter = new UserAdapter(usersList, getActivity());

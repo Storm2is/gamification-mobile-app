@@ -22,19 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="activities.LeaderBoardActivity"
-            android:label="@string/title_leaderboard">
-
-        </activity>
         <activity
             android:name="activities.MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="activities.TeamProgressActivity"
-            android:label="@string/title_teamprogress">
-
-        </activity>
-        <activity android:name="activities.HomeActivity"></activity>
     </application>
 
 </manifest>

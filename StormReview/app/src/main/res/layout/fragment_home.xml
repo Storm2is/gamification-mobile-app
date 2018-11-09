@@ -13,34 +13,52 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
             android:orientation="vertical">
 
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded"
-                android:paddingEnd="30dp"
+                android:paddingStart="10dp"
+                android:layout_gravity="center"
+                android:paddingEnd="10dp"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
             <Button
-                android:id="@+id/button1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/round_button" />
+                android:id="@+id/buttonP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/buttonM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="100dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button" />
 
@@ -83,8 +101,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:text="400 Pts"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginTop="65dp"
+                    android:layout_marginTop="45dp"
                     android:text="Intermediate"
                     android:textColor="@color/username"
                     android:textSize="20sp"
@@ -93,10 +119,26 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="100 Pts"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="50dp"
                     android:text="Novice"
                     android:textColor="@color/username"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="25 Pts"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
